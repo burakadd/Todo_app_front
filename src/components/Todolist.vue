@@ -1,10 +1,10 @@
-<template>
- <div class='todo'>
-    <input id='addTodo' v-model='todoHeader' type=text placeholder='Add yor todo'/>
-    <button @click='createTodo'>Add</button>
+ <template>
+  <div class='todo'>
+    <input v-model='todoHeader' type=text placeholder='Add your todo' @keyup.enter="createTodo"/>
     <h2>Not Completed</h2>
-    <div v-for='todo in notcompletedTodo' :key='todo.id'>
+    <div v-for='todo in notCompletedTodo' :key='todo.id'>
       <div>
+        {{ usrnm }}
         {{ todo.header }}
         <button @click='deleteTodo(todo.id)'>Delete</button>
         <button @click='completeTodo(todo.id)'>Complete</button>
@@ -23,19 +23,24 @@
 <script>
 import $ from 'jquery'
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: 'TodoList',
+  props: [
+    'usrnm'
+  ],
+  data: function () {
     return {
       todos: [],
-      todoHeader: '',
-      todoId: ''
+      todoHeader: ''
     }
   },
-  created () {
+  created: function () {
+    $.ajaxSetup({
+      headers: {'Authorization': 'Token ' + sessionStorage.getItem('token')}
+    })
     this.getTodoList()
   },
   computed: {
-    notcompletedTodo: function () {
+    notCompletedTodo: function () {
       return this.todos.filter(function (todo) {
         return !todo.completed
       })
@@ -106,11 +111,6 @@ export default {
       })
     }
   }
-//   created() {
-//     $.ajaxSetup({
-//       headers: {'Authorization': sessionStorage.getItem('token')},
-//     })
-//   },
 }
 </script>
 

@@ -13,7 +13,7 @@
 import $ from 'jquery'
 export default {
   name: 'Register',
-  data () {
+  data: function () {
     return {
       username: '',
       password: '',
@@ -41,8 +41,6 @@ export default {
           }
 
         })
-      } else {
-        alert('Error!!')
       }
     },
     loginWhenRegistered: function () {
@@ -55,7 +53,7 @@ export default {
         },
         success: response => {
           sessionStorage.setItem('token', response.token)
-          this.$router.replace({path: '/helloworld/'})
+          this.$router.replace({name: 'Homepage'})
         }
       })
     }

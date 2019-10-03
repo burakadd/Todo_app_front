@@ -1,8 +1,11 @@
 <template>
   <div>
-      <input v-model="username" type=text placeholder="Username"/>
-      <input v-model="password" type=password placeholder="Password"/>
-      <button @click="login">Login</button>
+      <input v-model='username' :usrnm='username' type=text placeholder='Username'/>
+      <input v-model='password' type=password placeholder='Password'/>
+      <button @click='login'>Login</button>
+       <div>
+          Don't have account? <button @click='goSignUp'>Sign up</button>
+        </div>
       <br>
 
   </div>
@@ -12,14 +15,18 @@
 import $ from 'jquery'
 export default {
   name: 'Login',
-  data () {
+  data: function () {
     return {
       username: '',
       password: ''
     }
   },
   methods: {
+    goSignUp: function () {
+      this.$router.replace({name: 'Register'})
+    },
     login: function () {
+      this.$emit('myuser', this.username)
       $.ajax({
         url: 'http://127.0.0.1:8000/token/',
         type: 'POST',
@@ -30,7 +37,7 @@ export default {
         success: response => {
           alert('You were logged in')
           sessionStorage.setItem('token', response.token)
-          this.$router.replace({path: '/helloworld/'})
+          this.$router.replace({name: 'Homepage'})
         },
         error: response => {
           if (response.status === 400) {
