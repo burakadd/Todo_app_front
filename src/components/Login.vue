@@ -1,6 +1,6 @@
 <template>
   <div>
-      <input v-model='username' :usrnm='username' type=text placeholder='Username'/>
+      <input v-model='username' type=text placeholder='Username'/>
       <input v-model='password' type=password placeholder='Password'/>
       <button @click='login'>Login</button>
        <div>
@@ -13,6 +13,7 @@
 
 <script>
 import $ from 'jquery'
+import {eventBus} from '../eventBus'
 export default {
   name: 'Login',
   data: function () {
@@ -26,7 +27,7 @@ export default {
       this.$router.replace({name: 'Register'})
     },
     login: function () {
-      this.$emit('myuser', this.username)
+      eventBus.$emit('myuser', '12345')
       $.ajax({
         url: 'http://127.0.0.1:8000/token/',
         type: 'POST',

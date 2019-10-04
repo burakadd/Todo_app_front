@@ -1,7 +1,6 @@
  <template>
   <div class='homepage'>
     <div>
-        <h1>Your todolist for today</h1>
         <button v-if='!isAuthorized' @click='goLogin'>Login</button>
         <button v-else @click='logout'>Logout</button>
         <Todolist v-if='isAuthorized'></Todolist>
@@ -11,14 +10,10 @@
 
 <script>
 // import $ from 'jquery'
-import Login from '@/components/Login'
-import Register from '@/components/Register'
 import Todolist from '@/components/Todolist'
 export default {
   name: 'Homepage',
   components: {
-    Login,
-    Register,
     Todolist
   },
   data: function () {
@@ -38,7 +33,7 @@ export default {
     },
     logout: function () {
       sessionStorage.removeItem('token')
-      window.location = '/login/'
+      this.$router.replace({name: 'Login'})
     }
   }
 }
