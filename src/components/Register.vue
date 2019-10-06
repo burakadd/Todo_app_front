@@ -44,6 +44,7 @@ export default {
       }
     },
     loginWhenRegistered: function () {
+      sessionStorage.setItem('username', this.username)
       $.ajax({
         url: 'http://127.0.0.1:8000/token/',
         type: 'POST',

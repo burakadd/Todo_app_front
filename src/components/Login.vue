@@ -13,7 +13,6 @@
 
 <script>
 import $ from 'jquery'
-import {eventBus} from '../eventBus'
 export default {
   name: 'Login',
   data: function () {
@@ -27,7 +26,7 @@ export default {
       this.$router.replace({name: 'Register'})
     },
     login: function () {
-      eventBus.$emit('myuser', '12345')
+      sessionStorage.setItem('username', this.username)
       $.ajax({
         url: 'http://127.0.0.1:8000/token/',
         type: 'POST',

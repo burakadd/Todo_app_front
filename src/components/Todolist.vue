@@ -2,7 +2,6 @@
   <div class='todo'>
     <input v-model='todoHeader' type=text placeholder='Add your todo' @keyup.enter="createTodo"/>
     <h2>Not Completed</h2>
-    <div>Here{{ creatorr }}</div>
     <div v-for='todo in notCompletedTodo' :key='todo.id'>
       <div>
         {{ todo.header }}
@@ -23,20 +22,15 @@
 <script>
 import $ from 'jquery'
 // import Login from '@/components/Login.vue'
-import {eventBus} from '@/eventBus'
 export default {
   name: 'TodoList',
   data: function () {
     return {
       todos: [],
-      todoHeader: '',
-      creatorr: ''
+      todoHeader: ''
     }
   },
   created: function () {
-    eventBus.$on('myuser', (creator) => {
-      this.creatorr = creator
-    })
     $.ajaxSetup({
       headers: {'Authorization': 'Token ' + sessionStorage.getItem('token')}
     })
@@ -71,11 +65,11 @@ export default {
       })
     },
     createTodo () {
+      // const username = sessionStorage.getItem('username')
       $.ajax({
         url: 'http://127.0.0.1:8000/todo/',
         type: 'POST',
         data: {
-          creator: this.creatorr,
           header: this.todoHeader
         },
         success: (response) => {

@@ -33,6 +33,7 @@ export default {
     },
     logout: function () {
       sessionStorage.removeItem('token')
+      sessionStorage.removeItem('username')
       this.$router.replace({name: 'Login'})
     }
   }
