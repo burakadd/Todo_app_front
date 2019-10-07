@@ -1,8 +1,7 @@
  <template>
   <div class='homepage'>
     <div>
-        <button v-if='!isAuthorized' @click='goLogin'>Login</button>
-        <button v-else @click='logout'>Logout</button>
+        <button class='btn-logout' @click='logout'>Log out</button>
         <Todolist v-if='isAuthorized'></Todolist>
     </div>
   </div>
@@ -40,5 +39,22 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+    .homepage{
+    max-width: 600px;
+    margin: auto;
+    padding: 10px;
+  }
+
+  .btn-logout{
+    /* float: right; */
+    margin-left: 6px;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    outline: none;
+    cursor: pointer;
+  }
 </style>

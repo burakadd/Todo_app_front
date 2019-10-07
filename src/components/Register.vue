@@ -1,11 +1,19 @@
 <template>
-  <div>
-      <input v-model="username" type=text placeholder="Username"/>
-      <input v-model="password" type=password placeholder="Password"/>
-      <input v-model="password2" type=password placeholder="Password2"/>
-      <button @click="register">Registration</button>
-      <br>
-
+  <div class="register-form" autocomplete="off">
+      <h1>Registration</h1>
+      <div class="register" autocomplete="off">
+        <input v-model="username" type=text placeholder="Username"/>
+      </div>
+      <div class="register" autocomplete="off">
+        <input v-model="password" type=password placeholder="Password"/>
+      </div>
+      <div class="register" autocomplete="off">
+        <input v-model="password2" type=password placeholder="Confirm password"/>
+      </div>
+      <button class='btn' @click="register">Sign up</button>
+      <div class='go-login'>
+        Already a user? <a href="/#/login">Sign in</a>
+      </div>
   </div>
 </template>
 
@@ -63,5 +71,56 @@ export default {
 </script>
 
 <style scoped>
+.register-form{
+    width: 360px;
+    background: rgba(255, 255, 255, 0.5);
+    height: 500px;
+    padding: 60px 40px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .register-form h1 {
+    text-align: center;
+    margin-bottom: 60px;
+    color: rgba(0, 0, 0, 0.5);
+  }
 
+  .register{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin: 30px 0;
+  }
+
+  .register input{
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.8);
+    border: none;
+    width: 100%;
+    outline: none;
+    background: none;
+    padding: 0 5px;
+    height: 40px;
+  }
+
+  .btn{
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    outline: none;
+    cursor: pointer;
+    transition: .5s;
+  }
+
+  .go-login{
+    margin-top: 30px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-size: 16px;
+  }
 </style>>
