@@ -12,7 +12,7 @@
       </div>
       <button class='btn' @click="register">Sign up</button>
       <div class='go-login'>
-        Already a user? <a href="/#/login">Sign in</a>
+        Already a user? <a href="/#/">Sign in</a>
       </div>
   </div>
 </template>
@@ -49,6 +49,8 @@ export default {
           }
 
         })
+      } else {
+        alert('Password was not confirmed')
       }
     },
     loginWhenRegistered: function () {

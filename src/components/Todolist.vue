@@ -3,7 +3,8 @@
     <div class='todo-header'>
       <input v-model='todoHeader' type=text placeholder='Add your todo' @keyup.enter="createTodo"/>
     </div>
-    <h2>Not Completed</h2>
+    <h3 v-if="!todos.length">Hey, {{ username }}! You have a lot to do for today. Let's write it down</h3>
+    <h3 v-if="todos.filter(function (todo) {return !todo.completed}).length">Not Completed</h3>
     <div v-for='todo in notCompletedTodo' :key='todo.id'>
       <div class='task'>
         <span class='todo-text'>{{ todo.header }}</span>
@@ -11,10 +12,10 @@
         <button @click='completeTodo(todo.id)'>Complete</button>
       </div>
     </div>
-    <h2>Completed</h2>
+    <h3 v-if='todos.filter(function (todo) {return todo.completed}).length'>Completed</h3>
     <div v-for='todo in completedTodo' :key='todo.id'>
       <div class='completed-task'>
-        {{ todo.header }}
+        <span class='todo-text'>{{ todo.header }}</span>
         <button @click='deleteTodo(todo.id)'>Delete</button>
       </div>
     </div>
@@ -23,13 +24,13 @@
 
 <script>
 import $ from 'jquery'
-// import Login from '@/components/Login.vue'
 export default {
   name: 'TodoList',
   data: function () {
     return {
       todos: [],
-      todoHeader: ''
+      todoHeader: '',
+      username: ''
     }
   },
   created: function () {
@@ -37,6 +38,7 @@ export default {
       headers: {'Authorization': 'Token ' + sessionStorage.getItem('token')}
     })
     this.getTodoList()
+    this.setUsername()
   },
   computed: {
     notCompletedTodo: function () {
@@ -109,6 +111,10 @@ export default {
           alert(response.statusText)
         }
       })
+    },
+    setUsername: function () {
+      this.username = sessionStorage.getItem('username')
+      return this.username
     }
   }
 }
@@ -132,6 +138,12 @@ export default {
   }
 
   .todo h2{
+    text-align: left;
+    /* margin-bottom: 60px; */
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .todo h3{
     text-align: left;
     /* margin-bottom: 60px; */
     color: rgba(0, 0, 0, 0.5);

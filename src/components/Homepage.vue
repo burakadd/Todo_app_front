@@ -1,7 +1,7 @@
  <template>
   <div class='homepage'>
     <div>
-        <button class='btn-logout' @click='logout'>Log out</button>
+        <button v-if='isAuthorized' class='btn-logout' @click='logout'>Log out</button>
         <Todolist v-if='isAuthorized'></Todolist>
     </div>
   </div>
